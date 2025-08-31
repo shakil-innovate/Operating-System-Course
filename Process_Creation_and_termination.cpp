@@ -14,6 +14,7 @@ int main()
     if(check>0)
     {
         cout<<"Parent Process"<<endl<<getpid()<<nl;
+        //from here the program exit
     }
     else if(check==0)
     {
@@ -23,4 +24,6 @@ int main()
     {
         cout<<"Process Failed"<<nl;
     }
+    
+      kill(check, SIGKILL);  //confuse how work
 }
