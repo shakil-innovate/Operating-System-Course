@@ -1,29 +1,28 @@
 #include<bits/stdc++.h>
-#include<unistd.h>      // for fork() and getpid()
-#include<sys/types.h>   //for pid_t
-#include<sys/wait.h>    //for wait()
-#define nl '\n'
+#include<sys/types.h>  //for pid_t
+#include<sys/wait.h>   //for wait()
+#include<unistd.h>    // for fork() and getpid
+#include<signal.h>    //  for kill
+
 using namespace std;
+#define nl '\n'
 
 int main()
 {
-    pid_t check=fork();      //it return a positive id to parent and 0 to child
-                             // and -1 to process failed
-    fork();                  //duplicate a process from here
-    
-    if(check>0)
-    {
-        cout<<"Parent Process"<<endl<<getpid()<<nl;
-        //from here the program exit
-    }
-    else if(check==0)
-    {
-        cout<<"Child Process"<<nl<<getpid()<<nl;
-    }
-    else
-    {
-        cout<<"Process Failed"<<nl;
-    }
-    
-      kill(check, SIGKILL);  //confuse how work
+   pid_t check=fork();
+
+   fork();
+   if(check>0)
+   {
+    cout<<"Parent thread and id is:"<<getpid()<<nl;
+    cout<<"Parent check "<<check<<nl;
+   }
+
+//    exit(0);
+
+   if(check==0)
+   {
+    cout<<"Child thread and id is: "<<getpid()<<nl;
+    cout<<"Child check :"<<check<<nl;
+   }
 }
