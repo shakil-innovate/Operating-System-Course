@@ -7,30 +7,29 @@ using namespace std;
 typedef long long ll;
 #define nl '\n'
 
-void *thread_fun(void *start)
+void* print(void* arg)
 {
-    ll st=*(ll *)(start);
-    for(;st<=10;st++)
-    {
-        cout<<st<<nl;
-        sleep(1);
-    }
-    return NULL;
-}
+    ll* x=(ll*) arg;
+    cout<<"IN child thread x is: "<<*x<<nl;
 
+    ll* sum=new ll();
+    *sum=2*(*x);
+
+    return (void*) sum;
+}
 int main()
 {
+    ll x=40;
     pthread_t thread1;
-    ll start=1;
-    
-    pthread_create(&thread1,NULL,thread_fun,(void *) &start);
-    pthread_join(thread1,NULL);
-    
-    cout<<nl;
-    for(ll i=4;i<=10;i++)
-    {
-        cout<<i<<nl;
-    }
-    
-    
+
+    pthread_create(&thread1,nullptr,print,&x);
+      void* sum;
+    pthread_join(thread1,&sum);
+
+    ll* _sum=(ll*)sum;
+    cout<<"IN main thread: "<<*_sum<<nl;
+  
+    return 0;
+
+
 }
