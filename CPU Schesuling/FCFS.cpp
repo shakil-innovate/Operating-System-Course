@@ -42,7 +42,4 @@
         cout<<"Total waiting time is: "<<tlt_waiting_time*1.0/n<<nl;
         cout<<"Total turnaround time is: "<<tlt_turnAround_time*1.0/n<<nl;
 
-        for(auto it:p)
-        cout<<it.pid<<" "<<it.arrival_time<<" "<<it.burst_time<<nl;
-
     }
